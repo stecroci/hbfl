@@ -5,7 +5,7 @@ const {
 const { sendS3Command } = require('./helpers')
 
 // Declare local variables
-const bucketName = 'hamster-bucket/* TODO: Add a unique identifier */'
+const bucketName = 'hamster-bucket-sc2023'
 
 async function execute () {
   try {
@@ -17,7 +17,12 @@ async function execute () {
 }
 
 async function createBucket (bucketName) {
-  // TODO: Create s3 bucket
+  const params = {
+    Bucket: bucketName,
+    ACL: 'public-read'
+  }
+  const command = new CreateBucketCommand(params)
+  return sendS3Command(command)
 }
 
 execute()

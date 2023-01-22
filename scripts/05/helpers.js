@@ -4,12 +4,12 @@ const glob = require('glob')
 const fs = require('fs')
 
 async function sendCommand (command) {
-  const client = new EC2Client({ region: process.env.AWS_REGION })
+  const client = new EC2Client({ region: 'us-east-2' })
   return client.send(command)
 }
 
 async function sendS3Command (command) {
-  const client = new S3Client({ region: process.env.AWS_REGION })
+  const client = new S3Client({ region: 'us-east-2' })
   return client.send(command)
 }
 

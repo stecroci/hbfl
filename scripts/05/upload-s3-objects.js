@@ -5,7 +5,7 @@ const {
 const helpers = require('./helpers')
 
 // Declare local variables
-const bucketName = '/* TODO: Bucket you created */'
+const bucketName = 'hamster-bucket-sc2023'
 
 async function execute () {
   try {
@@ -23,7 +23,15 @@ async function execute () {
 }
 
 async function uploadS3Object (bucketName, file) {
-  // TODO: Put object in S3
+  const params = {
+    Bucket: bucketName,
+    ACL: 'public-read',
+    Body: file.contents,
+    Key: file.name,
+    ContentType: helpers.getContentType(file.name)
+  }
+  const command = new PutObjectCommand(params)
+  return helpers.sendS3Command(command)
 }
 
 execute()
