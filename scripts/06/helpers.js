@@ -84,7 +84,7 @@ async function createSecurityGroup (sgName, port) {
     GroupName: sgName
   }
   const sgCommand = new CreateSecurityGroupCommand(sgParams)
-  const client = new EC2Client({ region: process.env.AWS_REGION })
+  const client = new EC2Client({ region: 'us-east-2' })
   const data = await client.send(sgCommand)
 
   const rulesParams = {
@@ -109,23 +109,23 @@ async function createSecurityGroup (sgName, port) {
 }
 
 async function sendDynamoDBCommand (command) {
-  const client = new DynamoDBClient({ region: process.env.AWS_REGION })
+  const client = new DynamoDBClient({ region: 'us-east-2' })
   return client.send(command)
 }
 
 async function sendDynamoItemCommand (command) {
-  const client = new DynamoDBClient({ region: process.env.AWS_REGION })
+  const client = new DynamoDBClient({ region: 'us-east-2' })
   const docClient = DynamoDBDocumentClient.from(client)
   return docClient.send(command)
 }
 
 async function sendRDSCommand (command) {
-  const client = new RDSClient({ region: process.env.AWS_REGION })
+  const client = new RDSClient({ region: 'us-east-2' })
   return client.send(command)
 }
 
 async function sendElastiCacheCommand (command) {
-  const client = new ElastiCacheClient({ region: process.env.AWS_REGION })
+  const client = new ElastiCacheClient({ region: 'us-east-2' })
   return client.send(command)
 }
 

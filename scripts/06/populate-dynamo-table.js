@@ -23,7 +23,19 @@ async function execute () {
 }
 
 async function populateTable (tableName, data) {
-  // TODO: Upload to table with batch write
+  const param = {
+    RequestItems: {
+      [tableName]: data.map(i => {
+        return {
+          PutRequest: {
+            Item: i
+          }
+        }
+      })
+    }
+  }
+  const command = new BatchWriteCommand(param)
+  return sendDynamoItemCommand(command)
 }
 
 execute()
