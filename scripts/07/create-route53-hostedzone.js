@@ -17,7 +17,12 @@ async function execute () {
 }
 
 function createHostedZone (hzName) {
-  // TODO: Create hostedzone with route53
+  const params = {
+    Name: hzName,
+    CallerReference: `${Date.now()}`
+  }
+  const command = new CreateHostedZoneCommand(params)
+  return sendCommand(command)
 }
 
 execute()
